@@ -17,38 +17,55 @@ class Media {
     return this._ratings;
   }
 
-  // set isCheckedOut() {
-
-  // }
+  set isCheckedOut(bool) {
+    this._isCheckedOut = bool;
+  }
 
   toggleCheckOutStatus() {
-    if (this._isCheckedOut === false) {
-      this._isCheckedOut === true;
-    } else {
-      this._isCheckedOut === false;
-    }
+    this.isCheckedOut = !this.isCheckedOut;
   }
 
-  get averageRating() {
-    // acc sums up every number
-    let sum = this._ratings.reduce(function (total, rating) {
+  getAverageRating() {
+    let sum = this.ratings.reduce(function (total, rating) {
       return total + rating;
     });
-    let average = sum / this._ratings.length;
-    return average;
+    return sum / this.ratings.length;
   }
 
-  addRating(rating) {
-    this._ratings.push(rating);
+  addRating(value) {
+    this.ratings.push(value);
   }
 }
 
 class Book extends Media {
-  constructor(author, title, ratings) {
-    super(title, ratings);
+  constructor(author, title, pages) {
+    // call the super method to inherit the title, isCheckedOut and ratings property
+    super(title);
     this._author = author;
+    this._pages = pages;
+  }
+
+  get author() {
+    return this._author;
+  }
+
+  get pages() {
+    return this._pages;
   }
 }
 
-const book1 = new Book("Stephen King", "The Shining", [9, 9, 10]);
-console.log(book1);
+class Movie extends Media {
+  constructor(director, title, runtime) {
+    super(title);
+    this._director = director;
+    this._runtime = runtime;
+  }
+
+  get director() {
+    return this._director;
+  }
+
+  get runtime() {
+    return this._runtime;
+  }
+}
